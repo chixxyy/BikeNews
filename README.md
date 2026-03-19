@@ -1,4 +1,4 @@
-# 🚴 BikeNews — 自行車即時新聞聚合器
+# BikeNews - 自行車即時新聞
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-線上體驗-blue?style=for-the-badge&logo=vercel)](https://bike-news.vercel.app/)
 
