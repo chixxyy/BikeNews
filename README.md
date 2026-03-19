@@ -1,5 +1,8 @@
 # 🚴 BikeNews — 自行車即時新聞聚合器
 
+[![Vercel Deployment](https://img.shields.io/v2/badge/Vercel-Deployed-success?style=for-the-badge&logo=vercel)](https://bike-news.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-線上體驗-blue?style=for-the-badge&logo=vercel)](https://bike-news.vercel.app/)
+
 一個以 Vue 3 + TypeScript + Vite 建構的自行車媒體即時新聞儀表板。聚合多家知名自行車媒體 RSS，透過第三方 rss2json 服務繞過 CORS 限制，提供即時的賽事與器材新聞。
 
 ---
