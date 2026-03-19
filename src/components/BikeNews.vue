@@ -357,7 +357,7 @@ onUnmounted(() => clearInterval(refreshInterval))
           <!-- Content -->
           <div class="flex-1 min-w-0">
             <div class="flex items-center space-x-3 mb-3 flex-wrap gap-y-2">
-              <span class="hidden sm:inline text-white font-black text-sm tracking-widest uppercase italic" :class="!isDark && 'text-slate-900'">{{ item.source }}</span>
+              <span class="hidden sm:inline font-black text-sm tracking-widest uppercase italic" :class="isDark ? 'text-white' : 'text-slate-900'">{{ item.source }}</span>
               <span
                 class="text-[10px] font-black px-3 py-1 rounded-md border-2 tracking-widest uppercase italic shadow-sm"
                 :class="{
