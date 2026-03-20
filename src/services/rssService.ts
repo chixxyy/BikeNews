@@ -3,7 +3,7 @@ export interface NewsItem {
   source: string;
   cat: string;
   tags: string[];
-  severity: 'critical' | 'high' | 'low';
+  severity: '器材技術' | '重大焦點' | '一般動態';
   timestamp: number;
   headline: string;
   summary: string;
@@ -29,20 +29,16 @@ function getCategory(headline: string, defaultCat: string): string {
   return defaultCat;
 }
 
-// Priority: 器材 (Tech/Gear) -> Critical, 重大新聞 (Major Events) -> High, 一般動態 (Negative/Results/Other) -> Low
-function getSeverity(headline: string, category: string): 'critical' | 'high' | 'low' {
+// Priority: 器材 (Tech/Gear) -> ical, 重大焦點 (Major Events) -> High, 一般動態 (Negative/Results/Other) -> Low
+function getSeverity(headline: string, category: string): '器材技術' | '重大焦點' | '一般動態' {
   const h = headline.toLowerCase();
   
-  // 1. 器材與技術 (Critical)
-  // 如果已經被分類為 Tech (不管是來源本身是 tech，還是被 getCategory 抓到的)，必定是 Critical
-  if (category === 'tech') return 'critical';
+  if (category === 'tech') return '器材技術';
   
-  // 2. 重大新聞 (High)
   const majorKeywords = ['tour de france', 'world champ', 'olympic', 'monument', 'roubaix', 'flanders', 'giro', 'vuelta', 'record', 'historic', 'tdf', 'paris-roubaix'];
-  if (majorKeywords.some((kw) => h.includes(kw))) return 'high';
+  if (majorKeywords.some((kw) => h.includes(kw))) return '重大焦點';
   
-  // 3. 一般動態 (Low): 負面事件, 比賽結果, 一般新聞等
-  return 'low';
+  return '一般動態';
 }
 
 // RSS2JSON Response Types

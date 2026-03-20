@@ -17,7 +17,7 @@ const filterTabs = [
   { label: '賽事', tag: 'pro' },
   { label: '器材', tag: 'tech' },
 ]
-const severityFilters = ['Critical', 'High', 'Low']
+const severityFilters = ['器材技術', '重大焦點', '一般動態']
 const activeFilter = ref({ label: '全部', tag: '' })
 const activeSeverity = ref<string[]>([])
 const searchQuery = ref('')
@@ -31,9 +31,9 @@ function getRelativeTime(timestamp: number) {
 }
 
 function getAccentColor(severity: string) {
-  if (severity === 'critical') return 'bg-red-500'
-  if (severity === 'high') return 'bg-orange-500'
-  if (severity === 'low') return 'bg-slate-500'
+  if (severity === '器材技術') return 'bg-red-500'
+  if (severity === '重大焦點') return 'bg-orange-500'
+  if (severity === '一般動態') return 'bg-slate-500'
   return 'bg-slate-500'
 }
 
@@ -285,9 +285,9 @@ onUnmounted(() => clearInterval(refreshInterval))
           @click="toggleSeverity(s)"
           class="text-[10px] font-black px-3 py-1.5 rounded-full border-2 transition-all uppercase tracking-widest italic whitespace-nowrap shrink-0"
           :class="{
-            'bg-red-500 border-red-400 text-white shadow-lg': s === 'Critical' && activeSeverity.includes(s),
-            'bg-orange-500 border-orange-400 text-white shadow-lg': s === 'High' && activeSeverity.includes(s),
-            'bg-slate-700 border-slate-600 text-white shadow-lg': s === 'Low' && activeSeverity.includes(s),
+            'bg-red-500 border-red-400 text-white shadow-lg': s === '器材技術' && activeSeverity.includes(s),
+            'bg-orange-500 border-orange-400 text-white shadow-lg': s === '重大焦點' && activeSeverity.includes(s),
+            'bg-slate-700 border-slate-600 text-white shadow-lg': s === '一般動態' && activeSeverity.includes(s),
             'border-slate-300 text-slate-400 hover:border-slate-500': !activeSeverity.includes(s) && !isDark,
             'border-slate-800 text-slate-500 hover:border-slate-700': !activeSeverity.includes(s) && isDark
           }"
@@ -359,9 +359,9 @@ onUnmounted(() => clearInterval(refreshInterval))
               <span
                 class="text-[10px] font-black px-3 py-1 rounded-md border-2 tracking-widest uppercase italic shadow-sm"
                 :class="{
-                  'bg-red-500 border-red-400 text-white': item.severity === 'critical',
-                  'bg-orange-500 border-orange-400 text-white': item.severity === 'high',
-                  'bg-slate-700 border-slate-600 text-white': item.severity === 'low',
+                  'bg-red-500 border-red-400 text-white': item.severity === '器材技術',
+                  'bg-orange-500 border-orange-400 text-white': item.severity === '重大焦點',
+                  'bg-slate-700 border-slate-600 text-white': item.severity === '一般動態',
                 }"
               >{{ item.severity }}</span>
               <span 
