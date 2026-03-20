@@ -12,7 +12,6 @@ const newsItems = ref<NewsItem[]>([])
 const isLoading = ref(true)
 const totalFetched = ref(0)
 let refreshInterval: any
-
 const filterTabs = [
   { label: '全部', tag: '' },
   { label: '賽事', tag: 'pro' },
@@ -31,11 +30,10 @@ function getRelativeTime(timestamp: number) {
   return `${Math.floor(hours / 24)}d`
 }
 
-function getAccentColor(cat: string, severity: string) {
+function getAccentColor(severity: string) {
   if (severity === 'critical') return 'bg-red-500'
   if (severity === 'high') return 'bg-orange-500'
-  if (cat === 'pro') return 'bg-yellow-500'
-  if (cat === 'tech') return 'bg-cyan-500'
+  if (severity === 'low') return 'bg-slate-500'
   return 'bg-slate-500'
 }
 
@@ -330,7 +328,7 @@ onUnmounted(() => clearInterval(refreshInterval))
           :class="isDark ? 'bg-[#0f1523]/60 border-slate-800/40 hover:border-yellow-500/40 hover:bg-[#111827]' : 'bg-white border-slate-200 hover:border-yellow-500/60 hover:shadow-2xl'"
         >
           <!-- Left accent bar -->
-          <div class="absolute left-0 top-0 bottom-0 w-1.5 transition-all group-hover:w-2" :class="getAccentColor(item.cat, item.severity)"></div>
+          <div class="absolute left-0 top-0 bottom-0 w-1.5 transition-all group-hover:w-2" :class="getAccentColor(item.severity)"></div>
 
           <!-- Source Badge / Avatar (Mobile) -->
           <div class="flex items-center space-x-3 sm:hidden">

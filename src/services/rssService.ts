@@ -29,11 +29,19 @@ function getCategory(headline: string, defaultCat: string): string {
   return defaultCat;
 }
 
-// Simple heuristic for severity
+// Priority: 器材 (tech keywords) -> Critical, 重大新聞 (major keywords) -> High, 負面/比賽/一般 -> Low
 function getSeverity(headline: string): 'critical' | 'high' | 'low' {
   const h = headline.toLowerCase();
-  if (h.includes('crash') || h.includes('ban') || h.includes('doping') || h.includes('collision')) return 'critical';
-  if (h.includes('win') || h.includes('results') || h.includes('tour de france') || h.includes('world champ')) return 'high';
+  
+  // 1. 器材
+  const techKeywords = ['review', 'tested', 'shimano', 'sram', 'campagnolo', 'wheel', 'groupset', 'helmet', 'bike', 'gear', 'tech', 'aero', 'watt', 'tire', 'saddle', 'first look', 'introduce', 'new bike'];
+  if (techKeywords.some((kw) => h.includes(kw))) return 'critical';
+  
+  // 2. 重大新聞
+  const majorKeywords = ['tour de france', 'world champ', 'olympic', 'monument', 'roubaix', 'flanders', 'giro', 'vuelta', 'record', 'historic'];
+  if (majorKeywords.some((kw) => h.includes(kw))) return 'high';
+  
+  // 3. 負面事件 / 比賽結果 / 選手職涯 / 其他
   return 'low';
 }
 
