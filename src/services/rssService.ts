@@ -29,19 +29,19 @@ function getCategory(headline: string, defaultCat: string): string {
   return defaultCat;
 }
 
-// Priority: 器材 (tech keywords) -> Critical, 重大新聞 (major keywords) -> High, 負面/比賽/一般 -> Low
-function getSeverity(headline: string): 'critical' | 'high' | 'low' {
+// Priority: 器材 (Tech/Gear) -> Critical, 重大新聞 (Major Events) -> High, 一般動態 (Negative/Results/Other) -> Low
+function getSeverity(headline: string, category: string): 'critical' | 'high' | 'low' {
   const h = headline.toLowerCase();
   
-  // 1. 器材
-  const techKeywords = ['review', 'tested', 'shimano', 'sram', 'campagnolo', 'wheel', 'groupset', 'helmet', 'bike', 'gear', 'tech', 'aero', 'watt', 'tire', 'saddle', 'first look', 'introduce', 'new bike'];
-  if (techKeywords.some((kw) => h.includes(kw))) return 'critical';
+  // 1. 器材與技術 (Critical)
+  // 如果已經被分類為 Tech (不管是來源本身是 tech，還是被 getCategory 抓到的)，必定是 Critical
+  if (category === 'tech') return 'critical';
   
-  // 2. 重大新聞
-  const majorKeywords = ['tour de france', 'world champ', 'olympic', 'monument', 'roubaix', 'flanders', 'giro', 'vuelta', 'record', 'historic'];
+  // 2. 重大新聞 (High)
+  const majorKeywords = ['tour de france', 'world champ', 'olympic', 'monument', 'roubaix', 'flanders', 'giro', 'vuelta', 'record', 'historic', 'tdf', 'paris-roubaix'];
   if (majorKeywords.some((kw) => h.includes(kw))) return 'high';
   
-  // 3. 負面事件 / 比賽結果 / 選手職涯 / 其他
+  // 3. 一般動態 (Low): 負面事件, 比賽結果, 一般新聞等
   return 'low';
 }
 
@@ -133,7 +133,7 @@ export async function fetchBikeNews(): Promise<NewsItem[]> {
           source: feed.name,
           cat: assignedCat,
           tags: [assignedCat],
-          severity: getSeverity(headline),
+          severity: getSeverity(headline, assignedCat),
           timestamp,
           headline,
           summary,
