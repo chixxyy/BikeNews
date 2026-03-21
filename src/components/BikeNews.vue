@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { fetchBikeNews, type NewsItem } from '../services/rssService'
-import { BarChart3, Zap, Search, Globe, Languages, Bike, Trophy, Timer, Flag, MousePointer2, Sun, Moon, Menu, Github, Heart, ExternalLink, ChevronUp } from 'lucide-vue-next'
+import { BarChart3, Zap, Search, Globe, Languages, Bike, Trophy, Timer, Flag, MousePointer2, Sun, Moon, Menu, Github, ChevronUp } from 'lucide-vue-next'
 import { useDark, useToggle, useScroll } from '@vueuse/core'
 
 const isDark = useDark()
